@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Pagamento 3Quadras</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="date"],
+    button {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1e90ff;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005eff;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #fff;
+    }
+
+    #totalValue {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Controle de Pagamento 3Quadras</h1>
+
+  <form id="paymentForm">
+    <div>
+      <label for="value">Valor (R$): </label>
+      <input type="number" id="value" step="0.01" min="0">
+    </div>
+    <div>
+      <label for="origin">Origem: </label>
+      <input type="text" id="origin">
+    </div>
+    <div>
+      <label for="dueDate">Data de Vencimento: </label>
+      <input type="date" id="dueDate">
+    </div>
+    <button type="button" onclick="addPayment()">Adicionar Pagamento</button>
+  </form>
+
+  <div>
+    <h2>Lista de Pagamentos</h2>
+    <table id="paymentTable">
+      <thead>
+        <tr>
+          <th>Valor</th>
+          <th>Origem</th>
+          <th>Data de Vencimento</th>
+        </tr>
+      </thead>
+      <tbody id="paymentList">
+      </tbody>
+    </table>
+    <p>Total: R$ <span id="totalValue">0.00</span></p>
+  </div>
+
+  <script>
+    function addPayment() {
+      const value = parseFloat(document.getElementById('value').value);
+      const origin = document.getElementById('origin').value;
+      const dueDate = document.getElementById('dueDate').value;
+
+      if (!value || !origin || !dueDate) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      const paymentList = document.getElementById('paymentList');
+      const newRow = paymentList.insertRow(-1);
+      const cellValue = newRow.insertCell(0);
+      const cellOrigin = newRow.insertCell(1);
+      const cellDueDate = newRow.insertCell(2);
+
+      cellValue.textContent = `R$ ${value.toFixed(2)}`;
+      cellOrigin.textContent = origin;
+      cellDueDate.textContent = dueDate;
+
+      updateTotal(value);
+    }
+
+    function updateTotal(value) {
+      const totalValue = document.getElementById('totalValue');
+      let currentTotal = parseFloat(totalValue.textContent);
+      currentTotal += value;
+      totalValue.textContent = currentTotal.toFixed(2);
+    }
+  </script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Pagamento Futurista</title>
+  <style>
+    /* ... (estilos CSS existentes) ... */
+
+    #paymentButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 50px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #paymentButton img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.3s ease;
+    }
+
+    #paymentButton:hover img {
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+  <h1>Mais contas</h1>
+
+  <form id="paymentForm">
+    <!-- ... (campos do formulário existentes) ... -->
+    <div id="paymentButton">
+      
+    </div>
+    <img src="https://media.giphy.com/media/Sk4kbfAwGzlWKoEIa0/giphy.gif" alt="Botão de Pagamento">
+  </form>
+
+  <!-- ... (scripts JavaScript existentes) ... -->
+</body>
+</html>
+
+</body>
+</html>
